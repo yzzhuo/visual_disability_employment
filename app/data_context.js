@@ -14,20 +14,18 @@ export const MyContextProvider = ({ children }) => {
 
   useEffect(() => {
     const loadData = async () => {
-      let data;
-      const cachedData = await db.csvData.toArray();
-      if (cachedData.length === 0) {
-        // fetch and save to IndexedDB
-        const response = await d3.csv("/us_population.csv");
-        data = response;
-        db.csvData.put({ data: response });
-      } else {
-        // use data from IndexedDB
-        data = cachedData[0].data;
-      }
-
-      console.log("data: ", data);
-      setValue(data);
+      // let data;
+      // const cachedData = await db.csvData.toArray();
+      // if (cachedData.length === 0) {
+      //   // fetch and save to IndexedDB
+      //   const response = await d3.csv("/us_population.csv");
+      //   data = response;
+      //   db.csvData.put({ data: response });
+      // } else {
+      //   // use data from IndexedDB
+      //   data = cachedData[0].data;
+      // }
+      // setValue(data);
     };
 
     loadData();
