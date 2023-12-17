@@ -1,6 +1,7 @@
 import { useD3 } from "../useD3";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import * as d3 from "d3";
+import limitationData from "../data/limitation_in_work.json"
 
 function BarChart() {
   const containerRef = useRef(null);
@@ -10,50 +11,25 @@ function BarChart() {
   const marginBottom = 10;
   const marginLeft = 30;
   const width = 600;
-
-  const [data, setData] = useState([
-    {
-      letter: 'Own disability',
-      frequency: 0.78
-    },
-    {
-      letter: 'Lack of education or training',
-      frequency: 0.12
-    },
-    {
-      letter: 'Need for special features at the job',
-      frequency: 0.105
-    },
-    {
-      letter: 'Lack of transport',
-      frequency: 0.103
-    },
-    {
-      letter: 'Employer’s negative attitudes',
-      frequency: 0.098
-    },
-    {
-      letter: 'Lack of support services',
-      frequency: 0.04
-    },
-    {
-      letter: 'Other',
-      frequency: 0.27
+  const amount = d3.sum(limitationData, d => d.value);
+  // data from https://ec.europa.eu/eurostat/databrowser/view/hlth_dlm140__custom_9042349/default/table?lang=en
+  const [data] = useState(limitationData.map((d) => {
+    return {
+      ...d,
+      value: d.value / amount,
     }
-  ]);
+  }));
   const ref = useD3(
     (svg) => {
       svg.selectAll("*").remove();
-
       const height = Math.ceil((data.length + 0.1) * barHeight) + marginTop + marginBottom;
-
       const x = d3.scaleLinear()
-        // .domain([0, d3.max(data, d => d.frequency)])
-        .domain([0, 1])
+        // .domain([0, d3.max(data, d => d.value)])
+        .domain([0, 0.3])
         .range([marginLeft, width - marginRight]);
 
       const y = d3.scaleBand()
-        .domain(d3.sort(data, d => -d.frequency).map(d => d.letter))
+        .domain(d3.sort(data, d => -d.value).map(d => d.letter))
         .rangeRound([marginTop, height - marginBottom])
         .padding(0.1);
 
@@ -75,7 +51,7 @@ function BarChart() {
         .join("rect")
         .attr("x", x(0))
         .attr("y", (d) => y(d.letter))
-        .attr("width", (d) => x(d.frequency) - x(0))
+        .attr("width", (d) => x(d.value) - x(0))
         .attr("height", y.bandwidth());
 
       // Append a label for each letter.
@@ -85,12 +61,12 @@ function BarChart() {
         .selectAll()
         .data(data)
         .join("text")
-        .attr("x", (d) => x(d.frequency))
+        .attr("x", (d) => x(d.value))
         .attr("y", (d) => y(d.letter) + y.bandwidth() / 2)
         .attr("dy", "0.35em")
         .attr("dx", -4)
-        .text((d) => format(d.frequency))
-        .call((text) => text.filter(d => x(d.frequency) - x(0) < 20) // short bars
+        .text((d) => format(d.value))
+        .call((text) => text.filter(d => x(d.value) - x(0) < 20) // short bars
           .attr("dx", +4)
           .attr("fill", "black")
           .attr("text-anchor", "start"));
@@ -104,7 +80,6 @@ function BarChart() {
       svg.append("g")
         .attr("transform", `translate(${marginLeft},0)`)
         .call(d3.axisLeft(y).tickSizeOuter(0));
-
     },
     []
   );
@@ -114,6 +89,9 @@ function BarChart() {
       <svg
         ref={ref}
       />
+      <div className="text-xs flex justify-end mt-4">
+        Source: <a className="link" href="https://ec.europa.eu/eurostat/databrowser/view/hlth_dlm140__custom_9042349/default/table?lang=en">Eurostat</a>
+      </div>
     </div>
   );
 }

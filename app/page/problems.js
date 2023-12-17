@@ -9,7 +9,7 @@ function Problem() {
       </h1>
       <div className="flex mt-12 w-10/12 justify-center ">
         <p className="w-5/12">
-          Survy of people with disabilities in the EU shows that they face one or more barriers to employment.
+          Survey of people with disabilities in the Eurostat shows that they face one or more barriers to employment.
         </p>
       </div>
       <div className="mb-24 flex-1 mt-16">

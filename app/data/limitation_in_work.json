@@ -1,0 +1,30 @@
+  [
+    {
+      "letter": "Both longstanding health condition or a basic activity difficulty and personal or environmental factors",
+      "value": 12352.167
+    },
+    {
+      "letter": "Longstanding health condition or a basic activity difficulty only",
+      "value": 22425.695
+    },
+    {
+      "letter": "Personal or environmental factors only",
+      "value": 24483.234
+    },
+    {
+      "letter": "Lack of qualifications/experience",
+      "value": 6185.891
+    },
+    {
+      "letter": "Lack of appropriate job opportunities",
+      "value": 11281.141
+    },
+    {
+      "letter": "Family/caring responsibilities",
+      "value": 6774.609
+    },
+    {
+      "letter": "Other personal or environmental reasons",
+      "value": 12593.761
+    }
+  ]

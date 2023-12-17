@@ -239,6 +239,9 @@ function DonutChart() {
         ref={ref}
       >
       </svg>
+      <div className="text-xs flex justify-end self-end mb-24">
+        Source: <a className="link" href="https://ec.europa.eu/eurostat/databrowser/view/hlth_silc_12/default/table?lang=en">Eurostat</a>
+      </div>
     </div>
   );
 }
