@@ -1,8 +1,8 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'Visual Analytics of Car Data',
-  description: 'COMP5048',
+  title: 'Visual Analytics of Employment of People with Disabilities',
+  description: 'Disability inclusion in employment is a global challenge.',
 }
 
 export default function RootLayout({ children }) {

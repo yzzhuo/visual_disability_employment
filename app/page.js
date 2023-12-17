@@ -6,7 +6,6 @@ import Situation from './page/situation';
 import Problem from './page/problems';
 import Suggestion from './page/suggestion';
 
-import { useRouter } from "next/navigation";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
