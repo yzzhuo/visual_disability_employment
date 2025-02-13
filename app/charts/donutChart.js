@@ -16,12 +16,24 @@ function DonutChart() {
     }, {
       name: 'With disability',
       children: [{
-        name: 'Some limitation',
-        value: 19.8,
+        name: 'Physical Disability',
+        value: 3, // Includes mobility impairments, wheelchair users, limb loss
       }, {
-        name: 'Severe limitation',
-        value: 7.2,
-      }],
+        name: 'Visual Impairment',
+        value: 3.2, // Includes blindness and low vision
+      }, {
+        name: 'Hearing Impairment',
+        value: 6, // Includes deafness and hearing loss
+      }, {
+        name: 'Intellectual Disability',
+        value: 2.6, // Includes Down syndrome, autism spectrum, cognitive impairments
+      }, {
+        name: 'Mental Health',
+        value: 4.5, // Includes depression, anxiety disorders, schizophrenia
+      }, {
+        name: 'Multiple Disabilities',
+        value: 2.7, // People with more than one significant disability
+      }]
     }]
   }
 
@@ -79,7 +91,8 @@ function DonutChart() {
 
       const format = d3.format(",d");
       path.append("title")
-        .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}\n${format(d.value)}`);
+        .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}\n${format(d.value)}`)
+        .attr("fill", "#ffffff")
 
       const label = svg.append("g")
         .attr("pointer-events", "none")
@@ -235,7 +248,7 @@ function DonutChart() {
           overflow: "visible",
           cursor: "pointer",
         }}
-        className="w-6/12"
+        className="w-6/12 text-primary"
         ref={ref}
       >
       </svg>

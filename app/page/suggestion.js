@@ -52,7 +52,7 @@ function Suggestion() {
                       <h2 className="font absolute top-4 left-4 rounded-full bg-cyan-700 w-8 h-8 text-white flex justify-center items-center">
                         {index + 1}
                       </h2>
-                      <p className="font-bold text-primary">
+                      <p className="font-bold text-white">
                         {item.title}
                       </p>
                     </div>
